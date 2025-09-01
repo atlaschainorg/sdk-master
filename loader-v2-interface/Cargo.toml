@@ -1,0 +1,30 @@
+[package]
+name = "atlas-loader-v2-interface"
+description = "Atlas non-upgradable BPF loader v2 instructions."
+documentation = "https://docs.rs/atlas-loader-v2-interface"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = ["dep:atlas-instruction", "serde"]
+serde = ["dep:serde", "dep:serde_bytes", "dep:serde_derive"]
+
+[dependencies]
+serde = { workspace = true, optional = true }
+serde_bytes = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-instruction = { workspace = true, features = ["bincode", "std"], optional = true }
+atlas-pubkey = { workspace = true }
+atlas-sdk-ids = { workspace = true }
+
+[lints]
+workspace = true

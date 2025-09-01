@@ -1,0 +1,19 @@
+[package]
+name = "atlas-file-download"
+description = "Atlas File Download Utility"
+documentation = "https://docs.rs/atlas-file-download"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+console = { workspace = true }
+indicatif = { workspace = true }
+log = { workspace = true }
+reqwest = { workspace = true, features = ["blocking", "brotli", "deflate", "gzip", "rustls-tls", "json"] }

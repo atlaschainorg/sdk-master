@@ -1,0 +1,113 @@
+[package]
+name = "atlas-program"
+description = "Atlas Program"
+documentation = "https://docs.rs/atlas-program"
+readme = "README.md"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+rust-version = "1.81.0"                          # atlas platform-tools rust version
+include = ["src/**/*", "README.md"]
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu", "wasm32-unknown-unknown"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[lib]
+crate-type = ["rlib"]
+
+[features]
+default = ["borsh"]
+borsh = [
+    "dep:atlas-borsh",
+    "atlas-hash/borsh",
+    "atlas-instruction/borsh",
+    "atlas-program-error/borsh",
+    "atlas-pubkey/borsh",
+]
+dev-context-only-utils = [
+    "atlas-instructions-sysvar/dev-context-only-utils",
+    "dep:atlas-system-interface",
+    "atlas-system-interface/bincode",
+]
+frozen-abi = [
+    "dep:atlas-frozen-abi",
+    "dep:atlas-frozen-abi-macro",
+    "atlas-epoch-rewards/frozen-abi",
+    "atlas-epoch-schedule/frozen-abi",
+    "atlas-fee-calculator/frozen-abi",
+    "atlas-hash/frozen-abi",
+    "atlas-instruction/frozen-abi",
+    "atlas-pubkey/frozen-abi",
+    "atlas-rent/frozen-abi",
+    "atlas-short-vec/frozen-abi",
+    "atlas-sysvar/frozen-abi",
+]
+
+[dependencies]
+memoffset = { workspace = true }
+atlas-account-info = { workspace = true, features = ["bincode"] }
+atlas-big-mod-exp = { workspace = true }
+atlas-blake3-hasher = { workspace = true, features = ["blake3"] }
+atlas-borsh = { workspace = true, optional = true }
+atlas-clock = { workspace = true, features = ["serde", "sysvar"] }
+atlas-cpi = { workspace = true }
+atlas-epoch-rewards = { workspace = true, features = ["serde", "sysvar"] }
+atlas-epoch-schedule = { workspace = true, features = ["serde", "sysvar"] }
+atlas-epoch-stake = { workspace = true }
+atlas-fee-calculator = { workspace = true, features = ["serde"] }
+atlas-frozen-abi = { workspace = true, optional = true, features = ["frozen-abi"] }
+atlas-frozen-abi-macro = { workspace = true, optional = true, features = ["frozen-abi"] }
+atlas-hash = { workspace = true, features = [
+    "bytemuck",
+    "serde",
+    "std",
+] }
+atlas-instruction = { workspace = true, default-features = false, features = [
+    "bincode",
+    "serde",
+    "std",
+    "syscalls",
+] }
+atlas-instruction-error = { workspace = true, features = ["num-traits"] }
+atlas-instructions-sysvar = { workspace = true }
+atlas-keccak-hasher = { workspace = true, features = ["sha3"] }
+atlas-last-restart-slot = { workspace = true, features = ["serde", "sysvar"] }
+atlas-msg = { workspace = true }
+atlas-native-token = { workspace = true }
+atlas-program-entrypoint = { workspace = true }
+atlas-program-error = { workspace = true, features = ["serde"] }
+atlas-program-memory = { workspace = true }
+atlas-program-option = { workspace = true }
+atlas-program-pack = { workspace = true }
+atlas-pubkey = { workspace = true, features = ["bytemuck", "curve25519", "serde", "std"] }
+atlas-rent = { workspace = true, features = ["serde", "sysvar"] }
+atlas-sdk-ids = { workspace = true }
+atlas-secp256k1-recover = { workspace = true }
+atlas-serde-varint = { workspace = true }
+atlas-serialize-utils = { workspace = true }
+atlas-sha256-hasher = { workspace = true, features = ["sha2"] }
+atlas-short-vec = { workspace = true }
+atlas-slot-hashes = { workspace = true, features = ["serde", "sysvar"] }
+atlas-slot-history = { workspace = true, features = ["serde", "sysvar"] }
+atlas-stable-layout = { workspace = true }
+atlas-system-interface = { optional = true, workspace = true, features = ["bincode"] }
+atlas-sysvar = { workspace = true, features = ["bincode", "bytemuck"] }
+atlas-sysvar-id = { workspace = true }
+
+[target.'cfg(not(target_os = "atlas"))'.dependencies]
+atlas-example-mocks = { workspace = true }
+
+[target.'cfg(target_os = "atlas")'.dependencies]
+atlas-define-syscall = { workspace = true }
+
+[dev-dependencies]
+atlas-pubkey = { workspace = true, features = ["dev-context-only-utils"] }
+atlas-sysvar = { workspace = true, features = ["dev-context-only-utils"] }
+
+[lints]
+workspace = true

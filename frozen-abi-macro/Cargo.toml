@@ -1,0 +1,27 @@
+[package]
+name = "atlas-frozen-abi-macro"
+description = "Atlas Frozen ABI Macro"
+documentation = "https://docs.rs/atlas-frozen-abi-macro"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[lib]
+proc-macro = true
+
+[features]
+default = []
+# activate the frozen-abi feature when we actually want to do frozen-abi testing,
+# otherwise leave it off because it requires nightly Rust
+frozen-abi = []
+
+[dependencies]
+proc-macro2 = { workspace = true }
+quote = { workspace = true }
+syn = { workspace = true, features = ["full", "extra-traits"] }
+
+[lints]
+workspace = true

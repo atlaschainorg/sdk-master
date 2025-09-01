@@ -1,0 +1,48 @@
+[package]
+name = "atlas-instruction"
+description = "Types for directing the execution of Atlas programs."
+documentation = "https://docs.rs/atlas-instruction"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = ["dep:bincode", "dep:serde"]
+borsh = ["dep:borsh"]
+default = ["std"]
+frozen-abi = [
+    "dep:atlas-frozen-abi",
+    "dep:atlas-frozen-abi-macro",
+    "serde",
+    "std",
+]
+serde = ["dep:serde", "dep:serde_derive", "atlas-pubkey/serde"]
+std = []
+syscalls = ["std"]
+
+[dependencies]
+bincode = { workspace = true, optional = true }
+borsh = { workspace = true, optional = true }
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-frozen-abi = { workspace = true, optional = true }
+atlas-frozen-abi-macro = { workspace = true, optional = true }
+atlas-instruction-error = { workspace = true, features = ["num-traits"] }
+atlas-pubkey = { workspace = true, default-features = false }
+
+[target.'cfg(target_os = "atlas")'.dependencies]
+atlas-define-syscall = { workspace = true }
+
+[dev-dependencies]
+atlas-instruction = { path = ".", features = ["borsh"] }
+
+[lints]
+workspace = true

@@ -1,0 +1,88 @@
+[package]
+name = "atlas-vote-interface"
+description = "Atlas vote interface."
+documentation = "https://docs.rs/atlas-vote-interface"
+version = "3.0.0"
+rust-version = "1.81.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = [
+    "dep:bincode",
+    "dep:atlas-serialize-utils",
+    "dep:atlas-system-interface",
+    "serde",
+]
+dev-context-only-utils = [
+    "bincode",
+    "dep:arbitrary",
+    "atlas-pubkey/dev-context-only-utils",
+]
+frozen-abi = [
+    "dep:atlas-frozen-abi",
+    "dep:atlas-frozen-abi-macro",
+    "serde",
+    "atlas-hash/frozen-abi",
+    "atlas-pubkey/frozen-abi",
+    "atlas-short-vec/frozen-abi",
+]
+serde = [
+    "dep:cfg_eval",
+    "dep:serde",
+    "dep:serde_derive",
+    "dep:serde_with",
+    "dep:atlas-serde-varint",
+    "dep:atlas-short-vec",
+    "atlas-hash/serde",
+    "atlas-pubkey/serde",
+]
+
+[dependencies]
+arbitrary = { workspace = true, features = ["derive"], optional = true }
+bincode = { workspace = true, optional = true }
+cfg_eval = { workspace = true, optional = true }
+num-derive = { workspace = true }
+num-traits = { workspace = true }
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+serde_with = { workspace = true, features = ["macros"], optional = true }
+atlas-clock = { workspace = true }
+atlas-frozen-abi = { workspace = true, features = [
+    "frozen-abi",
+], optional = true }
+atlas-frozen-abi-macro = { workspace = true, features = [
+    "frozen-abi",
+], optional = true }
+atlas-hash = { workspace = true }
+atlas-instruction = { workspace = true, features = ["std"] }
+atlas-instruction-error = { workspace = true, features = ["num-traits"] }
+atlas-pubkey = { workspace = true }
+atlas-rent = { workspace = true }
+atlas-sdk-ids = { workspace = true }
+atlas-serde-varint = { workspace = true, optional = true }
+atlas-serialize-utils = { workspace = true, optional = true }
+atlas-short-vec = { workspace = true, optional = true }
+atlas-system-interface = { workspace = true, features = ["bincode"], optional = true }
+
+[target.'cfg(target_os = "atlas")'.dependencies]
+atlas-serialize-utils = { workspace = true }
+
+[dev-dependencies]
+itertools = { workspace = true }
+rand = { workspace = true }
+atlas-epoch-schedule = { workspace = true }
+atlas-logger = { workspace = true }
+atlas-pubkey = { workspace = true, features = ["dev-context-only-utils"] }
+atlas-vote-interface = { path = ".", features = ["dev-context-only-utils"] }
+
+[lints]
+workspace = true

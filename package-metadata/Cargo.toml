@@ -1,0 +1,17 @@
+[package]
+name = "atlas-package-metadata"
+description = "Atlas Package Metadata"
+documentation = "https://docs.rs/atlas-package-metadata"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+atlas-package-metadata-macro = { workspace = true }
+atlas-pubkey = { workspace = true }

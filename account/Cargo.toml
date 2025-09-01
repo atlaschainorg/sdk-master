@@ -1,0 +1,50 @@
+[package]
+name = "atlas-account"
+description = "Atlas Account type"
+documentation = "https://docs.rs/atlas-account"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = ["dep:bincode", "dep:atlas-sysvar", "serde"]
+dev-context-only-utils = ["bincode", "dep:qualifier_attr"]
+frozen-abi = [
+    "dep:atlas-frozen-abi",
+    "dep:atlas-frozen-abi-macro",
+    "dep:atlas-logger",
+    "atlas-pubkey/frozen-abi",
+]
+serde = [
+    "dep:serde",
+    "dep:serde_bytes",
+    "dep:serde_derive",
+    "atlas-pubkey/serde",
+]
+
+[dependencies]
+bincode = { workspace = true, optional = true }
+qualifier_attr = { workspace = true, optional = true }
+serde = { workspace = true, optional = true }
+serde_bytes = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-account-info = { workspace = true }
+atlas-clock = { workspace = true }
+atlas-frozen-abi = { workspace = true, optional = true }
+atlas-frozen-abi-macro = { workspace = true, optional = true }
+atlas-instruction-error = { workspace = true }
+atlas-logger = { workspace = true, optional = true }
+atlas-pubkey = { workspace = true }
+atlas-sdk-ids = { workspace = true }
+atlas-sysvar = { workspace = true, features = ["bincode"], optional = true }
+
+[dev-dependencies]
+atlas-account = { path = ".", features = ["dev-context-only-utils"] }

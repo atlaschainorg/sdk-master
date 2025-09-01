@@ -1,0 +1,75 @@
+[package]
+name = "atlas-transaction"
+description = "Atlas transaction-types"
+documentation = "https://docs.rs/atlas-transaction"
+version = "3.0.1"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = [
+    "dep:bincode",
+    "dep:atlas-signer",
+    "serde",
+    "atlas-message/bincode",
+]
+blake3 = ["bincode", "atlas-message/blake3"]
+dev-context-only-utils = ["blake3", "serde", "verify"]
+frozen-abi = [
+    "dep:atlas-frozen-abi",
+    "dep:atlas-frozen-abi-macro",
+    "dep:atlas-logger",
+]
+serde = [
+    "dep:serde",
+    "dep:serde_derive",
+    "dep:atlas-short-vec",
+    "atlas-message/serde",
+    "atlas-signature/serde",
+]
+verify = ["blake3", "atlas-signature/verify"]
+
+[dependencies]
+bincode = { workspace = true, optional = true }
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-address = { workspace = true }
+atlas-frozen-abi = { workspace = true, optional = true }
+atlas-frozen-abi-macro = { workspace = true, optional = true }
+atlas-hash = { workspace = true }
+atlas-instruction = { workspace = true }
+atlas-instruction-error = { workspace = true }
+atlas-logger = { workspace = true, optional = true }
+atlas-message = { workspace = true }
+atlas-sanitize = { workspace = true }
+atlas-sdk-ids = { workspace = true }
+atlas-short-vec = { workspace = true, optional = true }
+atlas-signature = { workspace = true }
+atlas-signer = { workspace = true, optional = true }
+atlas-transaction-error = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+bincode = { workspace = true }
+borsh = { workspace = true }
+atlas-example-mocks = { path = "../example-mocks" }
+atlas-hash = { workspace = true }
+atlas-instruction = { workspace = true, features = ["borsh"] }
+atlas-keypair = { workspace = true }
+atlas-nonce = { workspace = true }
+atlas-packet = { workspace = true }
+atlas-presigner = { workspace = true }
+atlas-pubkey = { workspace = true, features = ["rand"] }
+atlas-sha256-hasher = { workspace = true }
+atlas-system-interface = { workspace = true, features = ["bincode"] }
+atlas-transaction = { path = ".", features = ["dev-context-only-utils"] }
+atlas-vote-interface = { workspace = true, features = ["bincode"] }
+static_assertions = { workspace = true }

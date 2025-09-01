@@ -1,0 +1,79 @@
+[package]
+name = "atlas-sysvar"
+description = "Atlas sysvar account types"
+documentation = "https://docs.rs/atlas-sysvar"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = ["dep:bincode", "serde"]
+bytemuck = ["dep:bytemuck", "dep:bytemuck_derive"]
+dev-context-only-utils = ["bincode", "bytemuck"]
+frozen-abi = ["dep:atlas-frozen-abi", "dep:atlas-frozen-abi-macro"]
+serde = [
+    "dep:serde",
+    "dep:serde_derive",
+    "atlas-clock/serde",
+    "atlas-epoch-rewards/serde",
+    "atlas-epoch-schedule/serde",
+    "atlas-fee-calculator/serde",
+    "atlas-last-restart-slot/serde",
+    "atlas-rent/serde",
+    "atlas-slot-hashes/serde",
+    "atlas-slot-history/serde",
+]
+
+[dependencies]
+bincode = { workspace = true, optional = true }
+bytemuck = { workspace = true, optional = true }
+bytemuck_derive = { workspace = true, optional = true }
+lazy_static = { workspace = true }
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-account-info = { workspace = true }
+atlas-clock = { workspace = true, features = ["sysvar"] }
+atlas-epoch-rewards = { workspace = true, features = ["sysvar"] }
+atlas-epoch-schedule = { workspace = true, features = ["sysvar"] }
+atlas-fee-calculator = { workspace = true }
+atlas-frozen-abi = { workspace = true, optional = true }
+atlas-frozen-abi-macro = { workspace = true, optional = true }
+atlas-hash = { workspace = true, features = ["bytemuck"] }
+atlas-last-restart-slot = { workspace = true, features = ["sysvar"] }
+atlas-program-entrypoint = { workspace = true }
+atlas-program-error = { workspace = true }
+atlas-pubkey = { workspace = true }
+atlas-rent = { workspace = true, features = ["sysvar"] }
+atlas-sdk-ids = { workspace = true }
+atlas-sdk-macro = { workspace = true }
+atlas-slot-hashes = { workspace = true, features = ["sysvar"] }
+atlas-slot-history = { workspace = true, features = ["sysvar"] }
+atlas-sysvar-id = { workspace = true }
+
+[target.'cfg(not(target_os = "atlas"))'.dependencies]
+base64 = { workspace = true }
+atlas-instruction = { workspace = true, features = ["std"] }
+atlas-program-memory = { workspace = true }
+
+[target.'cfg(target_os = "atlas")'.dependencies]
+atlas-define-syscall = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+serial_test = { workspace = true }
+atlas-example-mocks = { path = "../example-mocks" }
+atlas-msg = { workspace = true }
+atlas-sha256-hasher = { workspace = true }
+atlas-sysvar = { path = ".", features = ["dev-context-only-utils"] }
+test-case = { workspace = true }
+
+[lints]
+workspace = true

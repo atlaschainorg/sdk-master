@@ -1,0 +1,23 @@
+[package]
+name = "atlas-inflation"
+description = "Configuration for Atlas network inflation"
+documentation = "https://docs.rs/atlas-inflation"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[features]
+frozen-abi = ["dep:atlas-frozen-abi", "dep:atlas-frozen-abi-macro"]
+serde = ["dep:serde", "dep:serde_derive"]
+
+[dependencies]
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-frozen-abi = { workspace = true, optional = true }
+atlas-frozen-abi-macro = { workspace = true, optional = true }

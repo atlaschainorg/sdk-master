@@ -1,0 +1,40 @@
+[package]
+name = "atlas-keypair"
+description = "Concrete implementation of a Atlas `Signer`."
+documentation = "https://docs.rs/atlas-keypair"
+version = "3.0.1"
+rust-version = "1.81.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+seed-derivable = [
+    "dep:atlas-derivation-path",
+    "dep:atlas-seed-derivable",
+    "dep:ed25519-dalek-bip32",
+]
+
+[dependencies]
+ed25519-dalek = { workspace = true, features = ["rand_core"] }
+ed25519-dalek-bip32 = { workspace = true, optional = true }
+five8 = { workspace = true }
+rand = { workspace = true }
+atlas-derivation-path = { workspace = true, optional = true }
+atlas-pubkey = { workspace = true }
+atlas-seed-derivable = { workspace = true, optional = true }
+atlas-seed-phrase = { workspace = true }
+atlas-signature = { workspace = true, features = ["std", "verify"] }
+atlas-signer = { workspace = true }
+
+[dev-dependencies]
+serde_json = { workspace = true }
+static_assertions = { workspace = true }
+tiny-bip39 = { workspace = true }

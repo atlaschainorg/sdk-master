@@ -1,0 +1,60 @@
+[package]
+name = "atlas-system-interface"
+version = "2.0.0"
+description = "Instructions and constructors for the System program"
+readme = "README.md"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+rust-version = "1.81.0"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[lib]
+crate-type = ["rlib"]
+
+[features]
+bincode = ["dep:atlas-instruction", "serde"]
+frozen-abi = [
+    "dep:atlas-frozen-abi",
+    "dep:atlas-frozen-abi-macro",
+    "dep:atlas-logger",
+    "serde",
+    "atlas-pubkey/frozen-abi",
+    "atlas-pubkey/std",
+]
+serde = ["dep:serde", "dep:serde_derive", "atlas-pubkey/serde"]
+
+[dependencies]
+num-traits = { workspace = true }
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-frozen-abi = { workspace = true, features = ["frozen-abi"], optional = true }
+atlas-frozen-abi-macro = { workspace = true, features = ["frozen-abi"], optional = true }
+atlas-instruction = { workspace = true, features = ["bincode", "std"], optional = true }
+atlas-logger = { workspace = true, optional = true }
+atlas-msg = { workspace = true }
+atlas-program-error = { workspace = true }
+atlas-pubkey = { workspace = true, default-features = false }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+borsh = { workspace = true, features = ["derive", "unstable__schema"] }
+atlas-account-info = { workspace = true }
+atlas-cpi = { path = "../cpi" }
+atlas-example-mocks = { path = "../example-mocks" }
+atlas-nonce = { workspace = true }
+atlas-program-entrypoint = { workspace = true }
+atlas-program-error = { workspace = true, features = ["borsh"] }
+atlas-pubkey = { workspace = true, features = ["std"] }
+atlas-system-interface = { path = ".", features = ["bincode"] }
+atlas-sysvar = { workspace = true }
+atlas-sysvar-id = { workspace = true }
+static_assertions = { workspace = true }
+strum = { workspace = true }
+strum_macros = { workspace = true }

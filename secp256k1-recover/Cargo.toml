@@ -1,0 +1,45 @@
+[package]
+name = "atlas-secp256k1-recover"
+description = "Atlas SECP256K1 Recover"
+documentation = "https://docs.rs/atlas-secp256k1-recover"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[features]
+borsh = ["dep:borsh"]
+frozen-abi = ["dep:atlas-frozen-abi", "dep:atlas-frozen-abi-macro"]
+
+[dependencies]
+borsh = { workspace = true, optional = true }
+atlas-frozen-abi = { workspace = true, optional = true, features = [
+    "frozen-abi",
+] }
+atlas-frozen-abi-macro = { workspace = true, optional = true, features = [
+    "frozen-abi",
+] }
+thiserror = { workspace = true }
+
+[target.'cfg(not(target_os = "atlas"))'.dependencies]
+k256 = { workspace = true }
+
+[target.'cfg(target_os = "atlas")'.dependencies]
+atlas-define-syscall = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+borsh = { workspace = true }
+rand = { workspace = true }
+atlas-program = { path = "../program" }
+
+[target.'cfg(not(target_os = "atlas"))'.dev-dependencies]
+k256 = { workspace = true, features = ["ecdsa-core"] }
+
+[lints]
+workspace = true

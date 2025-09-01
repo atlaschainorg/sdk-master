@@ -1,0 +1,25 @@
+[package]
+name = "atlas-account-info"
+description = "Atlas AccountInfo and related definitions."
+documentation = "https://docs.rs/atlas-account-info"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = ["dep:bincode", "dep:serde"]
+
+[dependencies]
+bincode = { workspace = true, optional = true }
+serde = { workspace = true, optional = true }
+atlas-program-error = { workspace = true }
+atlas-program-memory = { workspace = true }
+atlas-pubkey = { workspace = true, default-features = false }

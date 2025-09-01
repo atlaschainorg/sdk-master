@@ -1,0 +1,67 @@
+[package]
+name = "atlas-genesis-config"
+description = "A Atlas network's genesis config."
+documentation = "https://docs.rs/atlas-genesis-config"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+frozen-abi = [
+    "dep:atlas-frozen-abi",
+    "dep:atlas-frozen-abi-macro",
+    "dep:atlas-logger",
+]
+serde = [
+    "dep:serde",
+    "dep:serde_derive",
+    "atlas-account/serde",
+    "atlas-clock/serde",
+    "atlas-cluster-type/serde",
+    "atlas-epoch-schedule/serde",
+    "atlas-fee-calculator/serde",
+    "atlas-inflation/serde",
+    "atlas-poh-config/serde",
+    "atlas-rent/serde",
+]
+
+[dependencies]
+bincode = { workspace = true }
+chrono = { workspace = true, features = ["alloc"] }
+memmap2 = { workspace = true }
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-account = { workspace = true }
+atlas-clock = { workspace = true }
+atlas-cluster-type = { workspace = true }
+atlas-epoch-schedule = { workspace = true }
+atlas-fee-calculator = { workspace = true }
+atlas-frozen-abi = { workspace = true, optional = true }
+atlas-frozen-abi-macro = { workspace = true, optional = true }
+atlas-hash = { workspace = true }
+atlas-inflation = { workspace = true }
+atlas-keypair = { workspace = true }
+atlas-logger = { workspace = true, optional = true }
+atlas-poh-config = { workspace = true }
+atlas-pubkey = { workspace = true }
+atlas-rent = { workspace = true }
+atlas-sdk-ids = { workspace = true }
+atlas-sha256-hasher = { workspace = true }
+atlas-shred-version = { workspace = true }
+atlas-signer = { workspace = true }
+atlas-time-utils = { workspace = true }
+
+[dev-dependencies]
+atlas-genesis-config = { path = ".", features = ["serde"] }
+atlas-pubkey = { workspace = true, features = ["rand"] }
+
+[lints]
+workspace = true

@@ -1,0 +1,110 @@
+[package]
+name = "atlas-sdk"
+description = "Atlas SDK"
+documentation = "https://docs.rs/atlas-sdk"
+readme = "README.md"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+include = ["src/**/*", "README.md"]
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[lib]
+crate-type = ["rlib"]
+
+[features]
+default = [
+    "borsh",
+    "full",  # functionality that is not compatible or needed for on-chain programs
+]
+full = [
+    "atlas-signature",
+    "atlas-pubkey/rand",
+    "dep:atlas-keypair",
+    "dep:atlas-offchain-message",
+    "dep:atlas-presigner",
+    "dep:atlas-seed-derivable",
+    "dep:atlas-seed-phrase",
+    "dep:atlas-shred-version",
+    "dep:atlas-signer",
+    "dep:atlas-transaction",
+    "dep:atlas-transaction-error",
+]
+borsh = ["atlas-program/borsh"]
+dev-context-only-utils = [
+    "atlas-account/dev-context-only-utils",
+    "atlas-program/dev-context-only-utils",
+    "atlas-transaction/dev-context-only-utils",
+]
+frozen-abi = [
+    "atlas-fee-structure/frozen-abi",
+    "atlas-account/frozen-abi",
+    "atlas-inflation/frozen-abi",
+    "atlas-program/frozen-abi",
+    "atlas-short-vec/frozen-abi",
+    "atlas-signature/frozen-abi",
+    "atlas-transaction/frozen-abi",
+    "atlas-transaction-error/frozen-abi",
+]
+
+[dependencies]
+bincode = { workspace = true }
+bs58 = { workspace = true }
+serde = { workspace = true }
+atlas-account = { workspace = true, features = ["bincode"] }
+atlas-epoch-info = { workspace = true, features = ["serde"] }
+atlas-epoch-rewards-hasher = { workspace = true }
+atlas-fee-structure = { workspace = true, features = ["serde"] }
+atlas-inflation = { workspace = true, features = ["serde"] }
+atlas-keypair = { workspace = true, optional = true, features = [
+    "seed-derivable",
+] }
+atlas-message = { workspace = true, features = ["serde"] }
+atlas-offchain-message = { workspace = true, optional = true, features = ["verify"] }
+atlas-presigner = { workspace = true, optional = true }
+atlas-program = { workspace = true }
+atlas-program-memory = { workspace = true }
+atlas-pubkey = { workspace = true, default-features = false, features = [
+    "std",
+] }
+atlas-sanitize = { workspace = true }
+atlas-sdk-ids = { workspace = true }
+atlas-sdk-macro = { workspace = true }
+atlas-seed-derivable = { workspace = true, optional = true }
+atlas-seed-phrase = { workspace = true, optional = true }
+atlas-serde = { workspace = true }
+atlas-serde-varint = { workspace = true }
+atlas-short-vec = { workspace = true }
+atlas-shred-version = { workspace = true, optional = true }
+atlas-signature = { workspace = true, features = [
+    "rand",
+    "serde",
+    "std",
+    "verify",
+], optional = true }
+atlas-signer = { workspace = true, optional = true }
+atlas-time-utils = { workspace = true }
+atlas-transaction = { workspace = true, features = [
+    "blake3",
+    "serde",
+    "verify"
+], optional = true }
+atlas-transaction-error = { workspace = true, features = [
+    "serde",
+], optional = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+atlas-instructions-sysvar = { workspace = true, features = ["dev-context-only-utils"] }
+atlas-program = { workspace = true, features = ["dev-context-only-utils"] }
+atlas-sdk = { path = ".", features = ["dev-context-only-utils"] }
+
+[lints]
+workspace = true

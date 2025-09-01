@@ -1,0 +1,34 @@
+[package]
+name = "atlas-offchain-message"
+description = "Atlas offchain message signing"
+documentation = "https://docs.rs/atlas-offchain-message"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+dev-context-only-utils = ["verify"]
+verify = ["dep:atlas-pubkey", "atlas-signature/verify"]
+
+[dependencies]
+num_enum = { workspace = true }
+atlas-hash = { workspace = true }
+atlas-packet = { workspace = true }
+atlas-pubkey = { workspace = true, optional = true }
+atlas-sanitize = { workspace = true }
+atlas-sha256-hasher = { workspace = true, features = ["sha2"] }
+atlas-signature = { workspace = true }
+atlas-signer = { workspace = true }
+
+[dev-dependencies]
+atlas-keypair = { workspace = true }
+atlas-offchain-message = { path = ".", features = ["dev-context-only-utils"] }
+static_assertions = { workspace = true }

@@ -1,0 +1,333 @@
+[workspace]
+members = [
+    "account",
+    "account-info",
+    "address",
+    "address-lookup-table-interface",
+    "atomic-u64",
+    "big-mod-exp",
+    "bincode",
+    "blake3-hasher",
+    "bls-signatures",
+    "bn254",
+    "borsh",
+    "client-traits",
+    "clock",
+    "cluster-type",
+    "commitment-config",
+    "compute-budget-interface",
+    "cpi",
+    "define-syscall",
+    "derivation-path",
+    "ed25519-program",
+    "epoch-info",
+    "epoch-rewards",
+    "epoch-rewards-hasher",
+    "epoch-schedule",
+    "epoch-stake",
+    "example-mocks",
+    "feature-gate-interface",
+    "fee-calculator",
+    "fee-structure",
+    "file-download",
+    "frozen-abi",
+    "frozen-abi-macro",
+    "genesis-config",
+    "hard-forks",
+    "hash",
+    "inflation",
+    "instruction",
+    "instruction-error",
+    "instructions-sysvar",
+    "keccak-hasher",
+    "keypair",
+    "loader-v2-interface",
+    "loader-v3-interface",
+    "loader-v4-interface",
+    "logger",
+    "message",
+    "msg",
+    "native-token",
+    "nonce",
+    "nonce-account",
+    "offchain-message",
+    "package-metadata",
+    "package-metadata-macro",
+    "packet",
+    "poh-config",
+    "precompile-error",
+    "presigner",
+    "program",
+    "program-entrypoint",
+    "program-error",
+    "program-memory",
+    "program-option",
+    "program-pack",
+    "pubkey",
+    "quic-definitions",
+    "rent",
+    "reward-info",
+    "sanitize",
+    "sdk",
+    "sdk-ids",
+    "sdk-macro",
+    "sdk-wasm-js",
+    "sdk-wasm-js-tests",
+    "secp256k1-program",
+    "secp256k1-recover",
+    "secp256r1-program",
+    "seed-derivable",
+    "seed-phrase",
+    "serde",
+    "serde-varint",
+    "serialize-utils",
+    "sha256-hasher",
+    "short-vec",
+    "shred-version",
+    "signature",
+    "signer",
+    "signer-store",
+    "slot-hashes",
+    "slot-history",
+    "stable-layout",
+    "system-interface",
+    "system-transaction",
+    "system-wasm-js",
+    "sysvar",
+    "sysvar-id",
+    "time-utils",
+    "transaction",
+    "transaction-error",
+    "validator-exit",
+    "vote-interface",
+]
+
+resolver = "2"
+
+[workspace.package]
+authors = ["Atlas Chain Foundation <dev@atlaschain.io>"]
+repository = "https://github.com/atlaschainorg/atlas-sdk"
+homepage = "https://atlaschain.io/"
+license = "MIT"
+edition = "2021"
+
+[workspace.lints.rust.unexpected_cfgs]
+level = "warn"
+check-cfg = [
+    'cfg(target_os, values("atlas"))',
+    'cfg(feature, values("frozen-abi", "no-entrypoint"))',
+]
+
+[workspace.metadata.release]
+pre-release-commit-message = "Publish {{crate_name}} v{{version}}"
+tag-message = "Publish {{crate_name}} v{{version}}"
+consolidate-commits = false
+
+[workspace.metadata.cli]
+atlas = "2.2.11"
+
+[workspace.dependencies]
+ahash = "0.8.11"
+anyhow = "1.0.96"
+arbitrary = "1.4.1"
+ark-bn254 = "0.4.0"
+ark-ec = "0.4.0"
+ark-ff = "0.4.0"
+ark-serialize = "0.4.0"
+array-bytes = "1.4.1"
+assert_matches = "1.5.0"
+base64 = "0.22.1"
+bincode = "1.3.3"
+bitflags = { version = "2.8.0" }
+bitvec = "1.0.1"
+blake3 = "1.5.5"
+blst = "0.3.14"
+blstrs = "0.7.1"
+borsh = { version = "1.5.5", features = ["derive", "unstable__schema"] }
+boxcar = "0.2.12"
+bs58 = { version = "0.5.1", default-features = false }
+bv = "0.11.1"
+bytemuck = "1.21.0"
+bytemuck_derive = "1.8.1"
+bytes = "1.10.0"
+cfg_eval = "0.1.2"
+chrono = { version = "0.4.39", default-features = false }
+console = "0.15.10"
+console_error_panic_hook = "0.1.7"
+console_log = "0.2.2"
+criterion = "0.5.1"
+curve25519-dalek = { version = "4.1.3", features = ["digest", "rand_core"] }
+dashmap = { version = "5.5.3", features = ["serde"] }
+derivation-path = { version = "0.2.0", default-features = false }
+digest = "0.10.7"
+ed25519-dalek = "2.1.1"
+ed25519-dalek-bip32 = "0.3.0"
+env_logger = "0.11.0"
+ff = "0.13.1"
+five8 = "0.2.1"
+five8_const = "0.1.3"
+getrandom = "0.2.10"
+group = "0.13.0"
+hex = "0.4.3"
+hmac = "0.12.1"
+im = "15.1.0"
+indicatif = "0.17.9"
+itertools = "0.12.1"
+js-sys = "0.3.77"
+k256 = "0.13.0"
+lazy_static = "1.5.0"
+libc = "0.2.170"
+log = "0.4.25"
+memmap2 = "0.5.10"
+memoffset = "0.9"
+num-bigint = "0.4.6"
+num-derive = "0.4"
+num-traits = "0.2.18"
+num_enum = "0.7.3"
+openssl = "0.10.72"
+pairing = "0.23.0"
+parking_lot = "0.12"
+pbkdf2 = { version = "0.11.0", default-features = false }
+proc-macro2 = "1.0.93"
+proptest = "1.6"
+qstring = "0.7.2"
+qualifier_attr = { version = "0.2.2", default-features = false }
+quote = "1.0.35"
+rand = "0.8.5"
+rayon = "1.10.0"
+reqwest = { version = "0.11.27", default-features = false }
+serde = "1.0.217" # must match the serde_derive version, see https://github.com/serde-rs/serde/issues/2584#issuecomment-1685252251
+serde-big-array = "0.5.1"
+serde_bytes = "0.11.15"
+serde_derive = "1.0.217" # must match the serde version, see https://github.com/serde-rs/serde/issues/2584#issuecomment-1685252251
+serde_json = "1.0.139"
+serde_with = { version = "3.12.0", default-features = false }
+serial_test = "2.0.0"
+sha2 = "0.10.8"
+sha3 = "0.10.8"
+signal-hook = "0.3.17"
+siphasher = "0.3.11"
+atlas-account = { path = "account", version = "3.0.0" }
+atlas-account-info = { path = "account-info", version = "3.0.0" }
+atlas-address = { path = "address", version = "1.0.0" }
+atlas-address-lookup-table-interface = { path = "address-lookup-table-interface", version = "3.0.0" }
+atlas-atomic-u64 = { path = "atomic-u64", version = "3.0.0" }
+atlas-big-mod-exp = { path = "big-mod-exp", version = "3.0.0" }
+atlas-bincode = { path = "bincode", version = "3.0.0" }
+atlas-blake3-hasher = { path = "blake3-hasher", version = "3.0.0" }
+atlas-bls-signatures = { path = "bls-signatures", version = "0.2.0" }
+atlas-bn254 = { path = "bn254", version = "3.0.0" }
+atlas-borsh = { path = "borsh", version = "3.0.0" }
+atlas-client-traits = { path = "client-traits", version = "3.0.0" }
+atlas-clock = { path = "clock", version = "3.0.0" }
+atlas-cluster-type = { path = "cluster-type", version = "3.0.0" }
+atlas-commitment-config = { path = "commitment-config", version = "3.0.0" }
+atlas-compute-budget-interface = { path = "compute-budget-interface", version = "3.0.0" }
+atlas-cpi = { path = "cpi", version = "3.0.0" }
+atlas-define-syscall = { path = "define-syscall", version = "3.0.0" }
+atlas-derivation-path = { path = "derivation-path", version = "3.0.0" }
+atlas-ed25519-program = { path = "ed25519-program", version = "3.0.0" }
+atlas-epoch-info = { path = "epoch-info", version = "3.0.0" }
+atlas-epoch-rewards = { path = "epoch-rewards", version = "3.0.0" }
+atlas-epoch-rewards-hasher = { path = "epoch-rewards-hasher", version = "3.0.0" }
+atlas-epoch-schedule = { path = "epoch-schedule", version = "3.0.0" }
+atlas-epoch-stake = { path = "epoch-stake", version = "3.0.0" }
+atlas-example-mocks = { path = "example-mocks", version = "3.0.0" }
+atlas-feature-gate-interface = { path = "feature-gate-interface", version = "3.0.0" }
+atlas-fee-calculator = { path = "fee-calculator", version = "3.0.0" }
+atlas-fee-structure = { path = "fee-structure", version = "3.0.0" }
+atlas-file-download = { path = "file-download", version = "3.0.0" }
+atlas-frozen-abi = { path = "frozen-abi", version = "3.0.0" }
+atlas-frozen-abi-macro = { path = "frozen-abi-macro", version = "3.0.0" }
+atlas-genesis-config = { path = "genesis-config", version = "3.0.0" }
+atlas-hard-forks = { path = "hard-forks", version = "3.0.0", default-features = false }
+atlas-hash = { path = "hash", version = "3.0.0", default-features = false }
+atlas-inflation = { path = "inflation", version = "3.0.0" }
+atlas-instruction = { path = "instruction", version = "3.0.0", default-features = false }
+atlas-instruction-error = { path = "instruction-error", version = "2.0.0" }
+atlas-instructions-sysvar = { path = "instructions-sysvar", version = "3.0.0" }
+atlas-keccak-hasher = { path = "keccak-hasher", version = "3.0.0" }
+atlas-keypair = { path = "keypair", version = "3.0.0" }
+atlas-last-restart-slot = { path = "last-restart-slot", version = "3.0.0" }
+atlas-loader-v2-interface = { path = "loader-v2-interface", version = "3.0.0" }
+atlas-loader-v3-interface = { path = "loader-v3-interface", version = "6.0.0" }
+atlas-loader-v4-interface = { path = "loader-v4-interface", version = "3.0.0" }
+atlas-logger = { path = "logger", version = "3.0.0" }
+atlas-message = { path = "message", version = "3.0.0" }
+atlas-msg = { path = "msg", version = "3.0.0" }
+atlas-native-token = { path = "native-token", version = "3.0.0" }
+atlas-nonce = { path = "nonce", version = "3.0.0" }
+atlas-nonce-account = { path = "nonce-account", version = "3.0.0" }
+atlas-offchain-message = { path = "offchain-message", version = "3.0.0" }
+atlas-package-metadata = { path = "package-metadata", version = "3.0.0" }
+atlas-package-metadata-macro = { path = "package-metadata-macro", version = "3.0.0" }
+atlas-packet = { path = "packet", version = "3.0.0" }
+atlas-poh-config = { path = "poh-config", version = "3.0.0" }
+atlas-precompile-error = { path = "precompile-error", version = "3.0.0" }
+atlas-presigner = { path = "presigner", version = "3.0.0" }
+atlas-program = { path = "program", version = "3.0.0", default-features = false }
+atlas-program-entrypoint = { path = "program-entrypoint", version = "3.0.0" }
+atlas-program-error = { path = "program-error", version = "3.0.0" }
+atlas-program-memory = { path = "program-memory", version = "3.0.0" }
+atlas-program-option = { path = "program-option", version = "3.0.0" }
+atlas-program-pack = { path = "program-pack", version = "3.0.0" }
+atlas-pubkey = { path = "pubkey", version = "3.0.0", default-features = false }
+atlas-quic-definitions = { path = "quic-definitions", version = "3.0.0" }
+atlas-rent = { path = "rent", version = "3.0.0", default-features = false }
+atlas-reward-info = { path = "reward-info", version = "3.0.0" }
+atlas-sanitize = { path = "sanitize", version = "3.0.0" }
+atlas-sdk = { path = "sdk", version = "3.0.0" }
+atlas-sdk-ids = { path = "sdk-ids", version = "3.0.0" }
+atlas-sdk-macro = { path = "sdk-macro", version = "3.0.0" }
+atlas-sdk-wasm-js = { path = "sdk-wasm-js", version = "1.0.0" }
+atlas-secp256k1-program = { path = "secp256k1-program", version = "3.0.0" }
+atlas-secp256k1-recover = { path = "secp256k1-recover", version = "3.0.0" }
+atlas-secp256r1-program = { path = "secp256r1-program", version = "3.0.0", default-features = false }
+atlas-seed-derivable = { path = "seed-derivable", version = "3.0.0" }
+atlas-seed-phrase = { path = "seed-phrase", version = "3.0.0" }
+atlas-serde = { path = "serde", version = "3.0.0" }
+atlas-serde-varint = { path = "serde-varint", version = "3.0.0" }
+atlas-serialize-utils = { path = "serialize-utils", version = "3.0.0" }
+atlas-sha256-hasher = { path = "sha256-hasher", version = "3.0.0" }
+atlas-short-vec = { path = "short-vec", version = "3.0.0" }
+atlas-shred-version = { path = "shred-version", version = "3.0.0" }
+atlas-signature = { path = "signature", version = "3.0.0", default-features = false }
+atlas-signer = { path = "signer", version = "3.0.0" }
+atlas-signer-store = { path = "signer-store", version = "0.1.0" }
+atlas-slot-hashes = { path = "slot-hashes", version = "3.0.0" }
+atlas-slot-history = { path = "slot-history", version = "3.0.0" }
+atlas-stable-layout = { path = "stable-layout", version = "3.0.0" }
+atlas-system-interface = { path = "system-interface", version = "2.0" }
+atlas-system-transaction = { path = "system-transaction", version = "3.0.0" }
+atlas-system-wasm-js = { path = "system-wasm-js", version = "1.0" }
+atlas-sysvar = { path = "sysvar", version = "3.0.0" }
+atlas-sysvar-id = { path = "sysvar-id", version = "3.0.0" }
+atlas-time-utils = { path = "time-utils", version = "3.0.0" }
+atlas-transaction = { path = "transaction", version = "3.0.0" }
+atlas-transaction-error = { path = "transaction-error", version = "3.0.0" }
+atlas-validator-exit = { path = "validator-exit", version = "3.0.0" }
+atlas-vote-interface = { path = "vote-interface", version = "3.0.0" }
+static_assertions = "1.1.0"
+strum = "0.24"
+strum_macros = "0.24"
+subtle = "2.6.1"
+syn = "2.0.87"
+tempfile = "3.20.0"
+test-case = "3.3.1"
+thiserror = "2.0.11"
+tiny-bip39 = "2.0.0"
+toml = "0.8.23"
+uriparse = "0.6.4"
+wasm-bindgen = "0.2.100"
+
+[profile.release]
+split-debuginfo = "unpacked"
+lto = "thin"
+
+# Enable basic optimizations for unittests
+[profile.test]
+opt-level = 1
+
+# Enable optimizations for procmacros for faster recompile
+[profile.dev.build-override]
+opt-level = 1

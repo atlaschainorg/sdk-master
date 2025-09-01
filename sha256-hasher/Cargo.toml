@@ -1,0 +1,31 @@
+[package]
+name = "atlas-sha256-hasher"
+description = "Atlas SHA256 hashing"
+documentation = "https://docs.rs/atlas-sha256-hasher"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[features]
+sha2 = ["dep:sha2"]
+
+[dependencies]
+atlas-hash = { workspace = true }
+
+[target.'cfg(not(target_os = "atlas"))'.dependencies]
+sha2 = { workspace = true, optional = true }
+
+[target.'cfg(target_os = "atlas")'.dependencies]
+atlas-define-syscall = { workspace = true }
+
+[dev-dependencies]
+atlas-sha256-hasher = { path = ".", features = ["sha2"] }
+
+[lints]
+workspace = true

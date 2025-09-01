@@ -1,0 +1,43 @@
+[package]
+name = "atlas-loader-v3-interface"
+description = "Atlas loader V3 interface."
+documentation = "https://docs.rs/atlas-loader-v3-interface"
+version = "6.1.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = ["dep:atlas-system-interface", "serde", "atlas-instruction/bincode"]
+dev-context-only-utils = ["bincode"]
+frozen-abi = ["dep:atlas-frozen-abi", "dep:atlas-frozen-abi-macro", "serde"]
+serde = ["dep:serde", "dep:serde_bytes", "dep:serde_derive", "atlas-pubkey/serde"]
+
+[dependencies]
+serde = { workspace = true, optional = true }
+serde_bytes = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-frozen-abi = { workspace = true, features = [
+    "frozen-abi",
+], optional = true }
+atlas-frozen-abi-macro = { workspace = true, features = [
+    "frozen-abi",
+], optional = true }
+atlas-instruction = { workspace = true, features = ["std"] }
+atlas-pubkey = { workspace = true, features = ["curve25519"] }
+atlas-sdk-ids = { workspace = true }
+atlas-system-interface = { workspace = true, features = ["bincode"], optional = true }
+
+[dev-dependencies]
+bincode = { workspace = true }
+atlas-loader-v3-interface = { path = ".", features = ["dev-context-only-utils"] }
+
+[lints]
+workspace = true

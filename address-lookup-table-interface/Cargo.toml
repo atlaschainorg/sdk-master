@@ -1,0 +1,59 @@
+[package]
+name = "atlas-address-lookup-table-interface"
+description = "Atlas address lookup table interface."
+documentation = "https://docs.rs/atlas-address-lookup-table-interface"
+version = "3.0.0"
+rust-version = "1.81.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = [
+    "dep:bincode",
+    "dep:atlas-instruction",
+    "dep:atlas-instruction-error",
+    "serde",
+    "atlas-instruction/bincode",
+]
+bytemuck = ["dep:bytemuck", "atlas-pubkey/bytemuck"]
+dev-context-only-utils = ["bincode", "bytemuck"]
+frozen-abi = ["dep:atlas-frozen-abi", "dep:atlas-frozen-abi-macro", "serde"]
+serde = ["dep:serde", "dep:serde_derive", "atlas-pubkey/serde"]
+
+[dependencies]
+bincode = { workspace = true, optional = true }
+bytemuck = { workspace = true, optional = true }
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-clock = { workspace = true }
+atlas-frozen-abi = { workspace = true, features = [
+    "frozen-abi",
+], optional = true }
+atlas-frozen-abi-macro = { workspace = true, features = [
+    "frozen-abi",
+], optional = true }
+atlas-instruction = { workspace = true, features = ["std"], optional = true }
+atlas-instruction-error = { workspace = true, optional = true }
+atlas-pubkey = { workspace = true }
+atlas-sdk-ids = { workspace = true }
+atlas-slot-hashes = { workspace = true }
+
+[target.'cfg(not(target_os = "atlas"))'.dependencies]
+atlas-pubkey = { workspace = true, features = ["curve25519"] }
+
+[dev-dependencies]
+atlas-address-lookup-table-interface = { path = ".", features = [
+    "dev-context-only-utils",
+] }
+atlas-hash = { workspace = true }
+
+[lints]
+workspace = true

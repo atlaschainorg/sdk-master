@@ -1,0 +1,23 @@
+[package]
+name = "atlas-nonce-account"
+description = "Atlas nonce account utils."
+documentation = "https://docs.rs/atlas-nonce-account"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+atlas-account = { workspace = true, features = ["bincode"] }
+atlas-hash = { workspace = true }
+atlas-nonce = { workspace = true, features = ["serde"] }
+atlas-sdk-ids = { workspace = true }
+
+[dev-dependencies]
+atlas-fee-calculator = { workspace = true }
+atlas-pubkey = { workspace = true }

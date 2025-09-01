@@ -1,0 +1,35 @@
+[package]
+name = "atlas-pubkey"
+description = "Atlas account addresses"
+documentation = "https://docs.rs/atlas-pubkey"
+version = "3.0.0"
+rust-version = "1.81.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+borsh = ["atlas-address/borsh"]
+bytemuck = ["atlas-address/bytemuck"]
+curve25519 = ["atlas-address/curve25519"]
+default = ["std"]
+dev-context-only-utils = ["atlas-address/dev-context-only-utils"]
+frozen-abi = ["atlas-address/frozen-abi"]
+rand = ["dep:rand", "atlas-address/rand"]
+serde = ["atlas-address/serde"]
+sha2 = ["atlas-address/sha2"]
+std = ["atlas-address/std"]
+
+[dependencies]
+rand = { workspace = true, optional = true }
+atlas-address = { workspace = true, features = ["atomic", "decode", "error", "sanitize", "sha2", "syscalls"] }
+
+[lints]
+workspace = true

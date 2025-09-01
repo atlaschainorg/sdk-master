@@ -1,0 +1,27 @@
+[package]
+name = "atlas-slot-hashes"
+description = "Types and utilities for the Atlas SlotHashes sysvar."
+documentation = "https://docs.rs/atlas-slot-hashes"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[features]
+serde = ["dep:serde", "dep:serde_derive", "atlas-hash/serde"]
+sysvar = ["dep:atlas-sdk-ids", "dep:atlas-sysvar-id"]
+
+[dependencies]
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-hash = { workspace = true, default-features = false }
+atlas-sdk-ids = { workspace = true, optional = true }
+atlas-sysvar-id = { workspace = true, optional = true }
+
+[dev-dependencies]
+atlas-sha256-hasher = { workspace = true }

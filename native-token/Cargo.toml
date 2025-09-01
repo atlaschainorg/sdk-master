@@ -1,0 +1,13 @@
+[package]
+name = "atlas-native-token"
+description = "Definitions for the native ATLAS token and its fractional lamports."
+documentation = "https://docs.rs/atlas-native-token"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]

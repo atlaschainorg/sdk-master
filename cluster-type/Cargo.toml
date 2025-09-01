@@ -1,0 +1,26 @@
+[package]
+name = "atlas-cluster-type"
+description = "Atlas ClusterType enum"
+documentation = "https://docs.rs/atlas-cluster-type"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+frozen-abi = ["dep:atlas-frozen-abi", "dep:atlas-frozen-abi-macro"]
+serde = ["dep:serde", "dep:serde_derive"]
+
+[dependencies]
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-frozen-abi = { workspace = true, optional = true }
+atlas-frozen-abi-macro = { workspace = true, optional = true }
+atlas-hash = { workspace = true, default-features = false }

@@ -1,0 +1,28 @@
+[package]
+name = "atlas-client-traits"
+description = "Traits for Atlas clients"
+documentation = "https://docs.rs/atlas-client-traits"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+atlas-account = { workspace = true }
+atlas-commitment-config = { workspace = true }
+atlas-epoch-info = { workspace = true }
+atlas-hash = { workspace = true }
+atlas-instruction = { workspace = true }
+atlas-keypair = { workspace = true }
+atlas-message = { workspace = true }
+atlas-pubkey = { workspace = true }
+atlas-signature = { workspace = true }
+atlas-signer = { workspace = true }
+atlas-system-interface = { workspace = true, features = ["bincode"] }
+atlas-transaction = { workspace = true, features = ["bincode"] }
+atlas-transaction-error = { workspace = true }

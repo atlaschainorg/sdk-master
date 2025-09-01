@@ -1,0 +1,42 @@
+[package]
+name = "atlas-epoch-rewards"
+description = "Atlas epoch rewards sysvar."
+documentation = "https://docs.rs/atlas-epoch-rewards"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+frozen-abi = [
+    "dep:atlas-frozen-abi",
+    "dep:atlas-frozen-abi-macro",
+    "atlas-hash/frozen-abi",
+    "std",
+]
+serde = ["dep:serde", "dep:serde_derive", "atlas-hash/serde"]
+std = []
+sysvar = ["dep:atlas-sysvar-id"]
+
+[dependencies]
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-frozen-abi = { workspace = true, optional = true }
+atlas-frozen-abi-macro = { workspace = true, optional = true }
+atlas-hash = { workspace = true, default-features = false }
+atlas-sdk-ids = { workspace = true }
+atlas-sdk-macro = { workspace = true }
+atlas-sysvar-id = { workspace = true, optional = true }
+
+[dev-dependencies]
+atlas-epoch-rewards = { path = ".", features = ["sysvar"] }
+
+[lints]
+workspace = true

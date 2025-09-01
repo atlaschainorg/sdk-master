@@ -1,0 +1,64 @@
+[package]
+name = "atlas-bls-signatures"
+description = "Atlas BLS Signatures"
+documentation = "https://docs.rs/atlas-bls-signatures"
+version = "0.2.0"
+rust-version = "1.81.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[lib]
+crate-type = ["rlib"]
+
+[features]
+bytemuck = ["dep:bytemuck"]
+default = ["std"]
+frozen-abi = ["dep:atlas-frozen-abi", "dep:atlas-frozen-abi-macro", "std"]
+parallel = ["dep:rayon"]
+serde = ["dep:cfg_eval", "dep:serde", "dep:serde_with"]
+atlas-signer-derive = ["dep:atlas-signer", "dep:atlas-signature", "dep:subtle"]
+std = ["dep:serde_json"]
+
+[dependencies]
+base64 = { workspace = true }
+bytemuck = { workspace = true, optional = true }
+cfg_eval = { workspace = true, optional = true }
+pairing = { workspace = true }
+serde = { workspace = true, features = ["derive"], optional = true }
+serde_json = { workspace = true, optional = true }
+serde_with = { workspace = true, features = ["macros"], optional = true }
+atlas-frozen-abi = { workspace = true, optional = true, features = [
+    "frozen-abi",
+] }
+atlas-frozen-abi-macro = { workspace = true, optional = true, features = [
+    "frozen-abi",
+] }
+thiserror = { workspace = true }
+
+[target.'cfg(not(target_os = "atlas"))'.dependencies]
+blst = { workspace = true }
+blstrs = { workspace = true }
+ff = { workspace = true }
+group = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true, optional = true }
+atlas-signature = { workspace = true, optional = true }
+atlas-signer = { workspace = true, optional = true }
+subtle = { workspace = true, optional = true }
+
+[dev-dependencies]
+bincode = { workspace = true }
+criterion = { workspace = true }
+atlas-bls-signatures = { path = ".", features = ["std"] }
+atlas-keypair = { workspace = true }
+tempfile = { workspace = true }
+
+[lints]
+workspace = true
+
+[[bench]]
+name = "bls_signatures"
+harness = false

@@ -1,0 +1,82 @@
+[package]
+name = "atlas-address"
+description = "Atlas account addresses"
+documentation = "https://docs.rs/atlas-address"
+version = "1.0.0"
+rust-version = "1.81.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[features]
+atomic = ["dep:atlas-atomic-u64"]
+borsh = ["dep:borsh", "std"]
+bytemuck = ["dep:bytemuck", "dep:bytemuck_derive"]
+curve25519 = ["dep:curve25519-dalek", "error", "sha2"]
+decode = ["dep:five8", "dep:five8_const", "error"]
+dev-context-only-utils = ["dep:arbitrary", "rand"]
+error = ["dep:atlas-program-error"]
+frozen-abi = [
+    "dep:atlas-frozen-abi",
+    "dep:atlas-frozen-abi-macro",
+    "dep:atlas-program-error",
+    "std",
+]
+rand = ["dep:rand", "atomic", "std"]
+sanitize = ["dep:atlas-sanitize"]
+serde = ["dep:serde", "dep:serde_derive"]
+sha2 = ["dep:atlas-sha256-hasher", "error"]
+std = ["decode"]
+syscalls = ["dep:atlas-define-syscall", "error"]
+
+[dependencies]
+arbitrary = { workspace = true, features = ["derive"], optional = true }
+borsh = { workspace = true, optional = true }
+bytemuck = { workspace = true, optional = true }
+bytemuck_derive = { workspace = true, optional = true }
+five8 = { workspace = true, optional = true }
+five8_const = { workspace = true, optional = true }
+rand = { workspace = true, optional = true }
+serde = { workspace = true, optional = true }
+serde_derive = { workspace = true, optional = true }
+atlas-atomic-u64 = { workspace = true, optional = true }
+atlas-frozen-abi = { workspace = true, features = ["frozen-abi"], optional = true }
+atlas-frozen-abi-macro = { workspace = true, features = ["frozen-abi"], optional = true }
+atlas-program-error = { workspace = true, optional = true }
+atlas-sanitize = { workspace = true, optional = true }
+
+[target.'cfg(not(target_os = "atlas"))'.dependencies]
+curve25519-dalek = { workspace = true, optional = true }
+atlas-sha256-hasher = { workspace = true, features = ["sha2"], optional = true }
+
+[target.'cfg(target_os = "atlas")'.dependencies]
+atlas-define-syscall = { workspace = true, optional = true }
+atlas-sha256-hasher = { workspace = true, optional = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+atlas-account-info = { path = "../account-info" }
+atlas-address = { path = ".", features = [
+    "atomic",
+    "borsh",
+    "curve25519",
+    "decode",
+    "dev-context-only-utils",
+    "error",
+    "sanitize",
+    "std",
+    "syscalls"
+] }
+atlas-cpi = { path = "../cpi" }
+atlas-example-mocks = { path = "../example-mocks" }
+atlas-hash = { workspace = true }
+atlas-instruction = { path = "../instruction", features = ["borsh"] }
+atlas-program-error = { workspace = true, features = ["borsh"] }
+atlas-system-interface = { path = "../system-interface", features = ["bincode"] }
+strum = { workspace = true }
+strum_macros = { workspace = true }
+
+[lints]
+workspace = true

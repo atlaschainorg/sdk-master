@@ -1,0 +1,33 @@
+[package]
+name = "atlas-example-mocks"
+description = "Atlas mock types for use in examples"
+documentation = "https://docs.rs/atlas-example-mocks"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+all-features = true
+rustdoc-args = ["--cfg=docsrs"]
+
+[features]
+bincode = ["atlas-system-interface/bincode"]
+
+[dependencies]
+serde = { workspace = true }
+serde_derive = { workspace = true }
+atlas-address-lookup-table-interface = { workspace = true }
+atlas-clock = { workspace = true }
+atlas-hash = { workspace = true }
+atlas-instruction = { workspace = true }
+atlas-keccak-hasher = { workspace = true }
+atlas-message = { workspace = true, features = ["serde"] }
+atlas-nonce = { workspace = true }
+atlas-pubkey = { workspace = true }
+atlas-sdk-ids = { workspace = true }
+atlas-system-interface = { workspace = true }
+thiserror = { workspace = true }

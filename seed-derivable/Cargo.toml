@@ -1,0 +1,16 @@
+[package]
+name = "atlas-seed-derivable"
+description = "Atlas trait defining the interface by which keys are derived."
+documentation = "https://docs.rs/atlas-seed-derivable"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+atlas-derivation-path = { workspace = true }

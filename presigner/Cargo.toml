@@ -1,0 +1,21 @@
+[package]
+name = "atlas-presigner"
+description = "A Atlas `Signer` implementation representing an externally-constructed `Signature`."
+documentation = "https://docs.rs/atlas-presigner"
+version = "3.0.0"
+authors = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+edition = { workspace = true }
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+atlas-pubkey = { workspace = true }
+atlas-signature = { workspace = true, features = ["verify"] }
+atlas-signer = { workspace = true }
+
+[dev-dependencies]
+atlas-keypair = { workspace = true }
